@@ -1,0 +1,22 @@
+<Response xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Count>4</Count>
+	<Message>Response returned successfully</Message>
+	<Results>
+		<AllVehicleMakes>
+			<Make_ID>460</Make_ID>
+			<Make_Name>FORD</Make_Name>
+		</AllVehicleMakes>
+		<AllVehicleMakes>
+			<Make_ID>476</Make_ID>
+			<Make_Name>DODGE</Make_Name>
+		</AllVehicleMakes>
+		<AllVehicleMakes>
+			<Make_ID>474</Make_ID>
+			<Make_Name>HONDA</Make_Name>
+		</AllVehicleMakes>
+		<AllVehicleMakes>
+			<Make_ID>449</Make_ID>
+			<Make_Name>MERCEDES-BENZ</Make_Name>
+		</AllVehicleMakes>
+	</Results>
+</Response>

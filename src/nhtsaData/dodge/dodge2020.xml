@@ -1,0 +1,109 @@
+<Response xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Count>17</Count>
+    <Message>Results returned successfully</Message>
+    <SearchCriteria>Make:dodge | ModelYear:2020</SearchCriteria>
+    <Results>
+        <MakeModels>
+            <Make_ID>476</Make_ID>
+            <Make_Name>DODGE</Make_Name>
+            <Model_ID>1893</Model_ID>
+            <Model_Name>Challenger</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>476</Make_ID>
+            <Make_Name>DODGE</Make_Name>
+            <Model_ID>1895</Model_ID>
+            <Model_Name>Charger</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>476</Make_ID>
+            <Make_Name>DODGE</Make_Name>
+            <Model_ID>1939</Model_ID>
+            <Model_Name>Journey</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>476</Make_ID>
+            <Make_Name>DODGE</Make_Name>
+            <Model_ID>1939</Model_ID>
+            <Model_Name>Journey</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>476</Make_ID>
+            <Make_Name>DODGE</Make_Name>
+            <Model_ID>1939</Model_ID>
+            <Model_Name>Journey</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>476</Make_ID>
+            <Make_Name>DODGE</Make_Name>
+            <Model_ID>3508</Model_ID>
+            <Model_Name>Durango</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>476</Make_ID>
+            <Make_Name>DODGE</Make_Name>
+            <Model_ID>3508</Model_ID>
+            <Model_Name>Durango</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>476</Make_ID>
+            <Make_Name>DODGE</Make_Name>
+            <Model_ID>3508</Model_ID>
+            <Model_Name>Durango</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>476</Make_ID>
+            <Make_Name>DODGE</Make_Name>
+            <Model_ID>14832</Model_ID>
+            <Model_Name>Grand Caravan</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>476</Make_ID>
+            <Make_Name>DODGE</Make_Name>
+            <Model_ID>14832</Model_ID>
+            <Model_Name>Grand Caravan</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>476</Make_ID>
+            <Make_Name>DODGE</Make_Name>
+            <Model_ID>14832</Model_ID>
+            <Model_Name>Grand Caravan</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>1422</Make_ID>
+            <Make_Name>DODGEN INDUSTRIES</Make_Name>
+            <Model_ID>4770</Model_ID>
+            <Model_Name>Dodgen Industries</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>8047</Make_ID>
+            <Make_Name>DODGER TRAILER MANUFACTURING INC</Make_Name>
+            <Model_ID>21501</Model_ID>
+            <Model_Name>580 Series</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>8047</Make_ID>
+            <Make_Name>DODGER TRAILER MANUFACTURING INC</Make_Name>
+            <Model_ID>21502</Model_ID>
+            <Model_Name>480 Series</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>580</Make_ID>
+            <Make_Name>SPRINTER (DODGE OR FREIGHTLINER)</Make_Name>
+            <Model_ID>3120</Model_ID>
+            <Model_Name>Sprinter</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>580</Make_ID>
+            <Make_Name>SPRINTER (DODGE OR FREIGHTLINER)</Make_Name>
+            <Model_ID>3120</Model_ID>
+            <Model_Name>Sprinter</Model_Name>
+        </MakeModels>
+        <MakeModels>
+            <Make_ID>580</Make_ID>
+            <Make_Name>SPRINTER (DODGE OR FREIGHTLINER)</Make_Name>
+            <Model_ID>3120</Model_ID>
+            <Model_Name>Sprinter</Model_Name>
+        </MakeModels>
+    </Results>
+</Response>
