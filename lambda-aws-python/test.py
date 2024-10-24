@@ -1,3 +1,7 @@
+#This is a test file to test the lambda function
+#Do whatever you want with this file
+#Just fucking code, get it done
+#I am probably wrong about a lot of this shit so if you can fix it and make it better, awesome
 import boto3
 import xml.etree.ElementTree as ET
 import pymysql

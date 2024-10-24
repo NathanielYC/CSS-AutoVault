@@ -1,3 +1,4 @@
+#Insert data from S3 to RDS
 import boto3
 import pymysql
 import xml.etree.ElementTree as ET
