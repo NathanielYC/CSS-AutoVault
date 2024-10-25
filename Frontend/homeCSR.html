@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoVault Home CSR View</title>
+  <link rel="stylesheet" href="homeStyles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tourney:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+     <!-- Top bar section -->
+    <div class="top-bar">
+         <!-- Logo image on the left -->
+        <img src="Logos.jpeg" alt="Logo" class="logo">
+
+         <!-- Application name and buttons container -->
+        <div class="app-nav-container">
+            <span class="app-name">AutoVault</span>
+            <div class="nav-buttons">
+                <button class="nav-button">Home</button>
+                <button class="nav-button">Meet The Team</button>
+                <button class="nav-button">About</button>
+            </div>
+        </div>
+
+         <!-- Circular image button with tooltip -->
+        <div class="button-container">
+            <img src="Profile.jpeg" alt="Circular Profile Button" class="profile-button" id="profile-button">
+            <div class="dropdown-menu" id="dropdown-menu">   
+                <button class="dropdown-item">Create New CSR Account</button>
+                <button class="dropdown-item">Account Settings</button>
+                <button class="dropdown-item">Sign Out</button>
+            </div>
+        </div>
+    </div>
+
+     <!-- Sidebar section -->
+    <div class="sidebar">
+        <button class="sidebar-button">Search</button>
+        <button class="sidebar-button">Edit</button>
+    </div>
+
+     <!--Import JavaScript Source File-->
+     <script src="homeFunctions.js"></script>
+
+</body>
+</html>
+

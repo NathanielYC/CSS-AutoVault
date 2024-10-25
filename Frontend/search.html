@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoVault Search</title>
+  <link rel="stylesheet" href="homeStyles.css">
+  <link rel="stylesheet" href="search.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tourney:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top bar section -->
+    <div class="top-bar">
+        <img src="Logos.jpeg" alt="Logo" class="logo">
+        <div class="app-nav-container">
+            <span class="app-name">AutoVault</span>
+            <div class="nav-buttons">
+                <button class="nav-button">Home</button>
+                <button class="nav-button">Meet The Team</button>
+                <button class="nav-button">About</button>
+            </div>
+        </div>
+        <div class="button-container">
+            <img src="Profile.jpeg" alt="Circular Profile Button" class="profile-button" id="profile-button">
+            <div class="dropdown-menu" id="dropdown-menu">   
+                <button class="dropdown-item">Create New CSR Account</button>
+                <button class="dropdown-item">Account Settings</button>
+                <button class="dropdown-item">Sign Out</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar section -->
+    <div class="sidebar">
+        <button class="sidebar-button">Search</button>
+        <button class="sidebar-button">Edit</button>
+    </div>
+
+    <div class="main-content">
+        <!-- Centered Car Information Heading -->
+        <h2 style="text-align: center;">Search Parameters</h2>
+    
+        <!-- Horizontal Row for Brand, Year, and Model Dropdowns -->
+        <div class="dropdown-container" style="display: flex; justify-content: center; gap: 20px;">
+            <!-- Brand Dropdown -->
+            <select id="brand-dropdown" class="dropdown">
+                <option value="">Select Car Brand</option>
+                <option value="dodge">Dodge</option>
+                <option value="ford">Ford</option>
+                <option value="ford">Mercedes-Benz</option>
+                <option value="ford">Honda</option>
+            </select>
+    
+            <!-- Year Dropdown -->
+            <select id="year-dropdown" class="dropdown">
+                <option value="">Select Year</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2022">2023</option>
+                <option value="2022">2024</option>
+                <option value="2022">2025</option>
+            </select>
+    
+            <!-- Model Dropdown -->
+            <select id="model-dropdown" class="dropdown">
+                <option value="">Select Model</option>
+            </select>
+        </div>
+    
+        <!-- Card Container to Display Car Info -->
+        <div id="car-info-card" class="card-container" style="display: none; margin-top: 20px;">
+            <h3 style="text-align: center;">Car Information</h3>
+            <div id="car-info" class="car-info-horizontal"></div>
+        </div>
+    </div>
+    
+
+    
+
+    <!-- Import JavaScript Source File -->
+    <script src="search.js"></script>
+</body>
+</html>
