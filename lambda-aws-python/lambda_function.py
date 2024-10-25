@@ -1,4 +1,3 @@
-#Insert data from S3 to RDS
 import boto3
 import pymysql
 import xml.etree.ElementTree as ET
@@ -14,7 +13,7 @@ def lambda_handler(event, context):
     #This needs to be changed to be more dynamic
     #Needs to be triggered by xml file upload or something like that
     bucket = 'cleanxmldata'
-    key = 'Dodge/cleaned_dodge_2022.xml'
+    key = 'Ford/cleaned_ford_2022.xml'
 
     # Extract ModelYear from the file name (e.g., cleaned_dodge_2023.xml)
     #This is so this program can extract all the different years from 2020 to 2025
@@ -37,19 +36,18 @@ def lambda_handler(event, context):
     
     # Extract Make and Model data
     for make_model in root.findall('MakeModels'):
-        make_id = make_model.find('Make_ID').text
         make_name = make_model.find('Make_Name').text
         model_id = make_model.find('Model_ID').text
         model_name = make_model.find('Model_Name').text
 
         # Add to vehicle_data 
         # This is for vehicle_information table in mysql
-        vehicle_data.append((model_id, model_name, make_id, model_year))
+        vehicle_data.append((model_id, model_name, model_year))
 
         # Add to dealer_data
         # This is for vehicle_dealers table in mysql
-        if make_id not in dealer_data:
-            dealer_data[make_id] = make_name
+        if make_name not in dealer_data:
+            dealer_data[make_name] = make_name
 
     # Connect to MySQL RDS
     # This might need to be changed?
@@ -64,24 +62,18 @@ def lambda_handler(event, context):
 
     try:
         with connection.cursor() as cursor:
-            # Insert Make data into vehicle_dealers table (avoid duplicates)
-            # Basically
-            #Dodge 476
-            #Honda 474
-            #Mercedes 449
-            #Ford 460
-            for make_id, make_name in dealer_data.items():
+            for make_name in dealer_data.keys():
                 insert_dealers_query = """
-                INSERT INTO vehicle_dealers (MakeID, MakeName)
-                VALUES (%s, %s)
+                INSERT INTO vehicle_dealers (MakeName)
+                VALUES (%s)
                 ON DUPLICATE KEY UPDATE MakeName = VALUES(MakeName)
                 """
-                cursor.execute(insert_dealers_query, (make_id, make_name))
+                cursor.execute(insert_dealers_query, (make_name,))
 
             # Check for each vehicle if the same ModelID and ModelYear exist
             # Wouldnt allow for duplicates of ModelID even if the year was different
             # This allows for duplicate ModelID as long as ModelYear is not already in mysql
-            for model_id, model_name, make_id, model_year in vehicle_data:
+            for model_id, model_name, model_year in vehicle_data:
                 check_query = """
                 SELECT COUNT(*) as count FROM vehicle_information 
                 WHERE ModelID = %s AND ModelYear = %s
@@ -92,11 +84,11 @@ def lambda_handler(event, context):
                 # If ModelYear is not in database already, insert the data
                 if result['count'] == 0:
                     insert_vehicle_query = """
-                    INSERT INTO vehicle_information (ModelID, ModelName, MakeID, ModelYear)
-                    VALUES (%s, %s, %s, %s)
+                    INSERT INTO vehicle_information (ModelID, ModelName, ModelYear)
+                    VALUES (%s, %s, %s)
                     """
                     try:
-                        cursor.execute(insert_vehicle_query, (model_id, model_name, make_id, model_year))
+                        cursor.execute(insert_vehicle_query, (model_id, model_name, model_year))
                     except pymysql.IntegrityError as e:
                         print(f"Duplicate entry for ModelID {model_id} and ModelYear {model_year}: {str(e)}")
 
