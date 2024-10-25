@@ -5,72 +5,98 @@ const modelDropdown = document.getElementById('model-dropdown');
 const carInfoCard = document.getElementById('car-info-card');
 const carInfoDiv = document.getElementById('car-info');
 
-// Function to fetch models based on brand and year
-function fetchModels() {
+// Event listeners for brand and year dropdowns
+brandDropdown.addEventListener('change', fetchModels);
+yearDropdown.addEventListener('change', fetchModels);
+
+// Function to reset and populate model dropdown
+function resetDropdown(dropdown, defaultText = 'Select Model') {
+    dropdown.innerHTML = '';
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.text = defaultText;
+    dropdown.appendChild(defaultOption);
+}
+
+async function fetchModels() {
     const brand = brandDropdown.value;
     const year = yearDropdown.value;
 
-    // This is to reset the models dropdown options if changing paramaters for different brands
-    //Example When picking Dodge, only show Dodge models, and then reset when switching to Ford
-    //To only show Ford models
-    //But this doesn't work so lmao
-    modelDropdown.options.length = 0;
-    const defaultOption = document.createElement('option');
-    defaultOption.value = '';
-    defaultOption.text = 'Select Model';
-    modelDropdown.appendChild(defaultOption);
+    // Reset model dropdown before adding new options
+    resetDropdown(modelDropdown);
 
-    // If both brand and year are selected, fetch car models
-    if (brand && year) {
-        console.log(`Fetching models with brand: ${brand} and year: ${year}`);
+    //Testing API 
+    if (!brand || !year) {
+        console.log("Both brand and year must be selected to fetch models.");
+        return;
+    }
 
-        // API call to fetch car models
-        fetch(`https://4k0jzsmg0k.execute-api.us-east-1.amazonaws.com/Testing/getCars?make=${brand}&year=${year}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Fetched data:', data);
+    try {
+        const apiUrl = `https://4k0jzsmg0k.execute-api.us-east-1.amazonaws.com/Testing/getCars?carbrand=${brand}&modelyear=${year}`;
+        
+        //See if calling API properly
+        console.log("API URL:", apiUrl);
 
-                // Parse the body if it's a string
-                let models = typeof data.body === 'string' ? JSON.parse(data.body) : data.body;
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) throw new Error(`Failed to fetch models: ${response.status}`);
 
-                console.log('Parsed models:', models);
-                if (Array.isArray(models)) {
-                    models.forEach(function(model) {
-                        const option = document.createElement('option');
-                        option.value = model.toLowerCase();
-                        option.text = model;
-                        modelDropdown.appendChild(option);
-                    });
-                } else {
-                    console.error('Expected an array, got:', models);
-                }
-            })
-            .catch(error => console.error('Error fetching models:', error));
+        const data = await response.json();
+
+        // Parse `data.body` since it's a JSON string
+        const models = JSON.parse(data.body);
+
+        // Populate model dropdown if models is an array
+        // THis is to make the dropdown buttons grab the models dynamically
+        //FOrd gets all ford models
+        //Dodge gets dodge models
+        if (Array.isArray(models)) {
+            models.forEach(car => {
+                const option = document.createElement('option');
+                option.value = car.ModelID;
+                option.text = car.ModelName;
+                modelDropdown.appendChild(option);
+            });
+        } else {
+            console.error('Expected an array in models:', models);
+        }
+    } catch (error) {
+        console.error('Error fetching models:', error);
     }
 }
 
-// Function to show selected car info in the card
+
+
+
+
+
+
+//Container Card display infomation
 function displayCarInfo() {
-    const selectedModel = modelDropdown.value;
+    
+    const selectedModelId = modelDropdown.value;
+    const selectedModelIndex = modelDropdown.selectedIndex;
     const brand = brandDropdown.options[brandDropdown.selectedIndex].text;
     const year = yearDropdown.value;
 
-    // Show the card only if a model is selected
-    if (selectedModel) {
+    const modelName = modelDropdown.options[selectedModelIndex].text;
+
+    if (selectedModelId) {
         carInfoCard.style.display = 'block';
 
-        // Populate the car information
         carInfoDiv.innerHTML = `
             <div class="car-info-item"><strong>Brand:</strong> ${brand}</div>
             <div class="car-info-item"><strong>Year:</strong> ${year}</div>
-            <div class="car-info-item"><strong>Model:</strong> ${selectedModel.charAt(0).toUpperCase() + selectedModel.slice(1)}</div>
+            <div class="car-info-item"><strong>Model ID:</strong> ${selectedModelId}</div>
+            <div class="car-info-item"><strong>Model Name:</strong> ${modelName}</div>
         `;
     } else {
         carInfoCard.style.display = 'none';
     }
 }
 
-// Add event listeners to both brand and year dropdowns
+
+// Add event listeners to brand and year dropdowns
 brandDropdown.addEventListener('change', fetchModels);
 yearDropdown.addEventListener('change', fetchModels);
 modelDropdown.addEventListener('change', displayCarInfo);

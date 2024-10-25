@@ -3,6 +3,8 @@ import pymysql
 import xml.etree.ElementTree as ET
 import re
 
+#Needs work now that id has been deleted from the database
+
 # Initialize boto3 S3 client
 #boto3 allows interaction with AWS services
 #Makes it easier to interact with S3, instead of writing out all HTTP requests
