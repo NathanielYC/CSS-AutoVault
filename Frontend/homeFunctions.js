@@ -23,3 +23,18 @@ function showTeam(){
 function showAbout(){
     document.getElementById("content").innerHTML = "<p>This is the About page</p>";
 }
+
+
+function showSearch() {
+    document.getElementById('main-content').style.display = 'block'; // Show search parameters
+    document.getElementById('edit-placeholder').style.display = 'none'; // Hide edit placeholder
+}
+
+function showEdit() {
+    document.getElementById('main-content').style.display = 'none'; // Hide search parameters
+    document.getElementById('edit-placeholder').style.display = 'block'; // Show edit placeholder
+}
+
+// Initially hide the main content and edit placeholder
+document.getElementById('main-content').style.display = 'none';
+document.getElementById('edit-placeholder').style.display = 'none';

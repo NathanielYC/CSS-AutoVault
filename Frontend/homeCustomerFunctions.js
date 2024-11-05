@@ -12,3 +12,4 @@ window.addEventListener('click', (event) => {
         dropdownMenu.style.display = 'none';
     }
 });
+
