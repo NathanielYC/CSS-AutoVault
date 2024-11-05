@@ -12,3 +12,14 @@ window.addEventListener('click', (event) => {
         dropdownMenu.style.display = 'none';
     }
 });
+
+//Home button display change
+function showHome(){
+    document.getElementById("content").innerHTML = "<p>This is the Home page</p>";
+}
+function showTeam(){
+    document.getElementById("content").innerHTML = "<p>This is the Team page</p>";
+}
+function showAbout(){
+    document.getElementById("content").innerHTML = "<p>This is the About page</p>";
+}

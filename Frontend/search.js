@@ -10,6 +10,7 @@ brandDropdown.addEventListener('change', fetchModels);
 yearDropdown.addEventListener('change', fetchModels);
 
 // Function to reset and populate model dropdown
+// THis should work now
 function resetDropdown(dropdown, defaultText = 'Select Model') {
     dropdown.innerHTML = '';
     const defaultOption = document.createElement('option');
@@ -64,8 +65,6 @@ async function fetchModels() {
         console.error('Error fetching models:', error);
     }
 }
-
-
 
 
 
