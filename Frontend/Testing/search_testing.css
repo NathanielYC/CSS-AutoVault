@@ -1,0 +1,73 @@
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 20px;
+    width: 80%;
+    background-color: #f9f9f9;
+    margin-top: 50px;
+    margin-left: 300px;
+}
+
+/* Style for dropdown container */
+.dropdown-container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Style for dropdowns */
+.dropdown {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    width: 150px;
+    display: flex;
+    flex-direction: row;
+}
+
+/* Optional: Style for the heading */
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Centered Car Information Heading */
+.card-container h3 {
+    text-align: center;
+}
+
+/* Flexbox for Horizontal Layout of Dropdowns */
+.dropdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card-container {
+    width: 60%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.car-info-horizontal {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.car-info-item {
+    flex: 1;
+    text-align: center;
+}
+
+
