@@ -18,7 +18,7 @@ function resetDropdown(dropdown, defaultText = 'Select Model') {
     dropdown.appendChild(defaultOption);
 }
 
-// Function to fetch models based on selected brand and year
+// Fetch models from your API and populate the model dropdown
 async function fetchModels() {
     const brand = brandDropdown.value;
     const year = yearDropdown.value;
@@ -26,25 +26,19 @@ async function fetchModels() {
     // Reset model dropdown before adding new options
     resetDropdown(modelDropdown);
 
-    // Ensure both brand and year are selected
     if (!brand || !year) {
         console.log("Both brand and year must be selected to fetch models.");
         return;
     }
 
     try {
-        // Corrected syntax for template literal
         const apiUrl = `https://4k0jzsmg0k.execute-api.us-east-1.amazonaws.com/Testing/getCars?carbrand=${brand}&modelyear=${year}`;
-        console.log("API URL:", apiUrl);
-
         const response = await fetch(apiUrl);
         if (!response.ok) throw new Error(`Failed to fetch models: ${response.status}`);
-
         const data = await response.json();
-        const models = JSON.parse(data.body); // Parse models from API response
+        const models = JSON.parse(data.body);
 
-        // Populate model dropdown if models are available
-        if (Array.isArray(models) && models.length > 0) {
+        if (Array.isArray(models)) {
             models.forEach(car => {
                 const option = document.createElement('option');
                 option.value = car.ModelID;
@@ -52,80 +46,105 @@ async function fetchModels() {
                 modelDropdown.appendChild(option);
             });
         } else {
-            console.error('No models available:', models);
+            console.error('Expected an array in models:', models);
         }
     } catch (error) {
         console.error('Error fetching models:', error);
     }
 }
 
-// Function to fetch NHTSA data based on selected model (dynamically handles selected vehicle)
-async function fetchBrandData() {
-    const brand = brandDropdown.value.toLowerCase(); // NHTSA API expects lowercase
+// Function to fetch data for selected brand, year, and model
+async function fetchSelectedVehicleData() {
+    const brand = brandDropdown.value.toUpperCase(); // NHTSA requires brand in uppercase
     const year = yearDropdown.value;
-    const model = modelDropdown.options[modelDropdown.selectedIndex].text.toLowerCase(); // Get model name in lowercase
+    const modelName = modelDropdown.options[modelDropdown.selectedIndex].text.toUpperCase().replace(/ /g, "%20");
 
-    if (!brand || !year || !model) return; // Ensure all selections are made
+    if (!brand || !year || !modelName) {
+        console.log("Brand, year, and model must be selected to fetch vehicle data.");
+        return;
+    }
 
-    // Format model name for NHTSA API
-    const formattedModel = model.replace(/\s+/g, '%20'); 
-    const apiUrl = `https://api.nhtsa.gov/SafetyRatings/modelyear/${year}/make/${brand}/model/${formattedModel}`;
-    console.log("Fetching NHTSA data from:", apiUrl);
-
+    const nhtsaUrl = `https://api.nhtsa.gov/SafetyRatings/modelyear/${year}/make/${brand}/model/${modelName}`;
     try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error(`Failed to fetch NHTSA data: ${response.status}`);
-
+        const response = await fetch(nhtsaUrl);
+        if (!response.ok) throw new Error(`Failed to fetch vehicle data: ${response.status}`);
         const data = await response.json();
-        const vehicleId = data.Results[0]?.VehicleId; // Use the first VehicleId if it exists
 
+        // Assuming first vehicle ID if multiple are returned
+        const vehicleId = data.Results[0]?.VehicleId;
         if (vehicleId) {
-            await fetchVehicleDetails(vehicleId); // Fetch detailed info for the selected vehicle
+            fetchVehicleDetails(vehicleId);
         } else {
-            console.error('No vehicle data found for this model.');
+            console.log("No vehicle ID found for the selected model.");
+            displayCarInfo(null); // Indicate no data available
         }
     } catch (error) {
-        console.error('Error fetching NHTSA data:', error);
+        console.error('Error fetching vehicle data:', error);
     }
 }
 
-// Function to fetch vehicle details based on VehicleId and handle empty JSON responses
+// Fetch detailed vehicle information using Vehicle ID
 async function fetchVehicleDetails(vehicleId) {
     const vehicleDetailUrl = `https://api.nhtsa.gov/SafetyRatings/VehicleId/${vehicleId}`;
-
     try {
-        const vehicleResponse = await fetch(vehicleDetailUrl);
-        if (!vehicleResponse.ok) throw new Error(`Failed to fetch vehicle details: ${vehicleResponse.status}`);
+        const response = await fetch(vehicleDetailUrl);
+        if (!response.ok) throw new Error(`Failed to fetch vehicle details: ${response.status}`);
+        const data = await response.json();
 
-        const vehicleData = await vehicleResponse.json();
-
-        if (vehicleData.Results && vehicleData.Results.length > 0) {
-            // Extract relevant data from the response
-            const vehicle = vehicleData.Results[0];
-            const vehiclePicture = vehicle.VehiclePicture || "No picture available"; // Placeholder if no picture is provided
-            const overallRating = vehicle.OverallRating || "No rating available";
-            const recallsCount = vehicle.RecallsCount || "No recall information";
-
-            // Display the detailed vehicle information
-            displayCarInfo(vehiclePicture, overallRating, recallsCount);
-        } else {
-            console.error('NHTSA API returned empty data. API may not have information for this vehicle.');
-        }
+        const vehicleDetails = data.Results[0];
+        displayCarInfo(vehicleDetails);
     } catch (error) {
         console.error('Error fetching vehicle details:', error);
     }
 }
 
-// Function to display vehicle details in the car info section
-function displayCarInfo(vehiclePicture, overallRating, recallsCount) {
+function displayCarInfo(vehicleDetails) {
+    if (!vehicleDetails || Object.keys(vehicleDetails).length === 0) {
+        carInfoCard.style.display = 'block';
+        carInfoDiv.innerHTML = `
+            <div class="no-data-available">
+                NO CAR DATA AVAILABLE
+            </div>
+        `;
+        return; // Exit the function if no data is available
+    }
+
+    const brand = brandDropdown.options[brandDropdown.selectedIndex].text;
+    const year = yearDropdown.value;
+    const modelName = modelDropdown.options[modelDropdown.selectedIndex].text;
+
+    // Check if vehicleDetails is undefined or has no data
+    if (!vehicleDetails || Object.keys(vehicleDetails).length === 0) {
+        carInfoCard.style.display = 'block';
+        carInfoDiv.innerHTML = `
+            <div style="text-align: center; font-size: 24px; font-weight: bold; color: red;">
+                NO CAR DATA AVAILABLE
+            </div>
+        `;
+        return; // Exit the function if no data is available
+    }
+
+    // Define the placeholder image path for missing images
+    const placeholderImage = "/Frontend/Images/nocar.png";
+    const vehicleImage = vehicleDetails.VehiclePicture ? vehicleDetails.VehiclePicture : placeholderImage;
+    console.log("Vehicle Image URL:", vehicleImage);
+
     carInfoCard.style.display = 'block';
     carInfoDiv.innerHTML = `
-        <div class="car-info-item"><strong>Vehicle Image:</strong><br><img src="${vehiclePicture}" alt="Vehicle Image" width="200"></div>
-        <div class="car-info-item"><strong>Overall Rating:</strong> ${overallRating}</div>
-        <div class="car-info-item"><strong>Recalls Count:</strong> ${recallsCount}</div>
+        <div class="car-info-left">
+            <div class="car-info-item"><strong>Brand:</strong> ${brand}</div>
+            <div class="car-info-item"><strong>Year:</strong> ${year}</div>
+            <div class="car-info-item"><strong>Model Name:</strong> ${modelName}</div>
+            <div class="car-info-item"><strong>Overall Rating:</strong> ${vehicleDetails.OverallRating ?? "N/A"}</div>
+            <div class="car-info-item"><strong>Recalls Count:</strong> ${vehicleDetails.RecallsCount ?? "N/A"}</div>
+        </div>
+        <div class="car-info-right">
+            <img src="${vehicleImage}" alt="Vehicle Image">
+        </div>
     `;
 }
 
 
-// Add event listener to model dropdown to fetch vehicle details when a model is selected
-modelDropdown.addEventListener('change', fetchBrandData);
+
+// Add event listener for model dropdown change to trigger fetching detailed data
+modelDropdown.addEventListener('change', fetchSelectedVehicleData);

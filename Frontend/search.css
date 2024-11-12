@@ -61,13 +61,42 @@ h2 {
 
 .car-info-horizontal {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 10px;
+    position: relative;
 }
 
-.car-info-item {
+.car-info-left {
     flex: 1;
     text-align: center;
 }
+
+.car-info-right {
+    flex: 1;
+    text-align: center;
+}
+
+.car-info-right img {
+    max-width: 100%; /* Adjusts image size to fit within the container */
+    max-height: 200px; /* Sets a max height for the image */
+    border-radius: 8px; /* Optional: Rounds the image corners */
+}
+
+.no-data-available {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    width: 100%;
+}
+
+
+
 
 
