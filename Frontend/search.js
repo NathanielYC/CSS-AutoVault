@@ -31,26 +31,29 @@ async function fetchModels() {
         return;
     }
 
-    try {
-        const apiUrl = `https://4k0jzsmg0k.execute-api.us-east-1.amazonaws.com/Testing/getCars?carbrand=${brand}&modelyear=${year}`;
-        const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error(`Failed to fetch models: ${response.status}`);
-        const data = await response.json();
-        const models = JSON.parse(data.body);
+try {
+    const apiUrl = `https://qztzgel3a2.execute-api.us-east-1.amazonaws.com/Testing/?carbrand=${brand}&modelyear=${year}`;
+    const response = await fetch(apiUrl);
+    if (!response.ok) throw new Error(`Failed to fetch models: ${response.status}`);
 
-        if (Array.isArray(models)) {
-            models.forEach(car => {
-                const option = document.createElement('option');
-                option.value = car.ModelID;
-                option.text = car.ModelName;
-                modelDropdown.appendChild(option);
-            });
-        } else {
-            console.error('Expected an array in models:', models);
-        }
-    } catch (error) {
-        console.error('Error fetching models:', error);
+    const data = await response.json();
+
+    // Check if data.body is already an object, or if we need to parse it
+    const models = typeof data.body === 'string' ? JSON.parse(data.body) : data.body;
+
+    if (Array.isArray(models)) {
+        models.forEach(car => {
+            const option = document.createElement('option');
+            option.value = car.ModelID;
+            option.text = car.ModelName;
+            modelDropdown.appendChild(option);
+        });
+    } else {
+        console.error('Expected an array in models:', models);
     }
+} catch (error) {
+    console.error('Error fetching models:', error);
+}
 }
 
 // Function to fetch data for selected brand, year, and model

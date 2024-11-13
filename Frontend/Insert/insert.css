@@ -1,0 +1,105 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container for the form */
+.container {
+    width: 100%;
+    max-width: 600px; /* Set max width for form */
+    margin: 50px auto; /* Center the container */
+    padding: 30px; /* Add more padding for space */
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+    font-family: 'Arial', sans-serif; /* Clean font for readability */
+}
+
+/* Header */
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333; /* Darker text color for visibility */
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Input fields */
+input[type="text"], input[type="number"], select {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd; /* Lighter border color for input fields */
+    border-radius: 8px; /* Rounded corners for inputs */
+    width: 100%; /* Ensure the inputs span the full width of the container */
+    transition: border-color 0.3s ease;
+}
+
+/* Input focus effect */
+input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    border-color: #0070ff; /* Blue border on focus */
+    outline: none; /* Remove default focus outline */
+}
+
+/* Button Styling */
+button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #0070ff; /* Blue background for the button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%; /* Make the button span the full width */
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Response message */
+#responseMessage {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: green; /* Change based on success or error */
+}
+
+/* Vehicle Details Section */
+.vehicle-details {
+    margin-top: 40px;
+    display: none; /* Hidden by default, shown after form submission */
+    text-align: center;
+}
+
+.vehicle-details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.vehicle-details th, .vehicle-details td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.vehicle-details th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+.vehicle-details tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
