@@ -13,3 +13,37 @@ window.addEventListener('click', (event) => {
     }
 });
 
+// Home button
+function showHome(){
+    hideEverything();
+    document.getElementById('home-page').style.display = 'block'; // Show home page
+}
+
+// Meet the Team button
+function showTeam(){
+    hideEverything();
+    document.getElementById('team-page').style.display = 'block'; // Show team page
+}
+
+// About button
+function showAbout(){
+    hideEverything();
+    document.getElementById('about-page').style.display = 'block'; // Show about page
+}
+
+// Search button
+function showSearch() {
+    hideEverything();
+    document.getElementById('main-content').style.display = 'block'; // Show search parameters
+}
+
+// Hide all content
+function hideEverything() {
+    document.getElementById('main-content').style.display = 'none'; // Hide search parameters
+    document.getElementById('home-page').style.display = 'none'; // Hide home page
+    document.getElementById('team-page').style.display = 'none'; // Hide team page
+    document.getElementById('about-page').style.display = 'none'; // Hide about page
+}
+
+// Initially hide the main content and edit placeholder
+hideEverything();

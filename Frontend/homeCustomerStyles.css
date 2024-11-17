@@ -121,13 +121,16 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin: 0 auto;
         padding: 20px;
         width: 80%;
+        max-width: 1000px; /* Set a maximum width to contain the content neatly */
+        margin: 50px auto; /* Center the main content horizontally */
         background-color: #f9f9f9;
-        margin-top: 50px;
-        margin-left: 300px;
+        border: 1px solid #ccc; /* Optional: adds a border for visual containment */
+        border-radius: 8px; /* Optional: adds rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow for depth */
     }
+    
     
     /* Style for dropdown container */
     .dropdown-container {
@@ -169,6 +172,8 @@
     
     .card-container {
         width: 60%;
+        max-width: 800px; /* Optional: limits width to avoid too much stretching on large screens */
+        margin: 0 auto; /* Center horizontally */
         border: 1px solid #ccc;
         border-radius: 8px;
         padding: 16px;
@@ -176,6 +181,7 @@
         background-color: #f9f9f9;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+    
     
     .car-info-horizontal {
         display: flex;
