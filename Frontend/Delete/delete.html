@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Car Data</title>
+  <link rel="stylesheet" href="delete.css">
+</head>
+<body>
+  <h1>AWS RDS Delete Car Data</h1>
+  
+  <!-- Table to Display Vehicle Data -->
+  <table id="vehicle-table" border="1">
+    <thead>
+      <tr>
+        <th>Model ID</th>
+        <th>Model Name</th>
+        <th>Model Year</th>
+        <th>Car Brand</th>
+        <th>Delete?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data Rows Will Be Populated Here Dynamically -->
+    </tbody>
+  </table>
+  
+  <!-- Optional Loading Indicator -->
+  <div id="loading" style="display: none;">Loading...</div>
+
+  <script src="delete.js"></script>
+</body>
+</html>
