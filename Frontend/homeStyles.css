@@ -115,3 +115,43 @@
     .sidebar-button:hover {
         background-color: rgb(126, 182, 255); 
     }
+
+/* Container for the placeholder */
+#edit-placeholder-container {
+    display: flex;
+    justify-content: center; /* Center the placeholder horizontally */
+    position: relative;
+    width: 100%; /* Ensure it spans the full width */
+}
+
+#edit-placeholder {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center align the buttons horizontally */
+    width: 100%; /* Ensure buttons stack properly */
+    max-width: 300px; /* Optional: Limit max width for better layout control */
+    margin: 20px auto; /* Center it with some margin */
+}
+
+.insert-delete-button {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(0, 110, 255); /* Match the top bar color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Ensure buttons stretch to container width */
+    max-width: 300px; /* Optional: Limit button width */
+    transition: background-color 0.3s;
+    margin-bottom: 20px; /* Explicit spacing below each button */
+}
+
+/* Ensure last button has no extra margin */
+.insert-delete-button:last-child {
+    margin-bottom: 0;
+}
+
+
+

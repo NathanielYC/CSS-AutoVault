@@ -30,19 +30,14 @@
         <div class="button-container">
             <img src="Profile.jpeg" alt="Circular Profile Button" class="profile-button" id="profile-button">
             <div class="dropdown-menu" id="dropdown-menu">   
-                <button class="dropdown-item"><a href="https://autovault.auth.us-east-1.amazoncognito.com/signup?client_id=76dkdmqdk3jajlbtb9797q757e&response_type=code&scope=email+openid&redirect_uri=https%3A%2F%2Fwebpage-source-files.s3.us-east-1.amazonaws.com%2FhomeCSR.html">Create New CSR Account</a></button>
+                <button class="dropdown-item"><a href="https://autovaultcsr.auth.us-east-1.amazoncognito.com/signup?client_id=2jigaplkttg5qdpvktknstkrd2&response_type=code&scope=email+openid&redirect_uri=https://webpage-source-files.s3.us-east-1.amazonaws.com/homeCSR.html">Create New CSR Account</a></button>
                 <button class="dropdown-item">Account Settings</button>
-                <button class="dropdown-item"><a href="https://autovault.auth.us-east-1.amazoncognito.com/logout?client_id=76dkdmqdk3jajlbtb9797q757e&logout_uri=https%3A%2F%2Fwebpage-source-files.s3.us-east-1.amazonaws.com/LogIn.html">Sign Out</a></button>
+                <button class="dropdown-item"><a href="https://autovaultcsr.auth.us-east-1.amazoncognito.com/logout?client_id=2jigaplkttg5qdpvktknstkrd2&logout_uri=https%3A%2F%2Fwebpage-source-files.s3.us-east-1.amazonaws.com%2FLogIn.html">Sign Out</a></button>
             </div>
         </div>
     </div>
 
      <!-- Sidebar section -->
-    <div class="sidebar">
-        <button class="sidebar-button">Search</button>
-        <button class="sidebar-button">Edit</button>
-    </div>
-
     <div class="sidebar">
         <button class="sidebar-button" onclick="showSearch()">Search</button>
         <button class="sidebar-button" onclick="showEdit()">Edit</button>
@@ -85,8 +80,25 @@
         </div>
     </div>
 
-    <div id="edit-placeholder" style="display: none; text-align: center; margin-top: 20px;">
-        <h3>Edit Functionality Goes Here</h3>
+    <div id="edit-placeholder" style="display: flex; text-align: center;">
+        <h3>Edit Vehicle Database</h3>
+        <!-- Insert Button -->
+        <button class="insert-delete-button" onclick="window.location.href='Insert/insert.html'">Insert Vehicle</button>
+        <!-- Delete Button -->
+        <button class="insert-delete-button" onclick="window.location.href='Delete/delete.html'">Delete Vehicle</button>
+    </div>
+    
+
+    <div id="home-page" style="display: none; text-align: center; margin-top: 20px;">
+        <h3>This is the Home page</h3>
+    </div>
+
+    <div id="team-page" style="display: none; text-align: center; margin-top: 20px;">
+        <h3>This is the Team page</h3>
+    </div>
+
+    <div id="about-page" style="display: none; text-align: center; margin-top: 20px;">
+        <h3>This is the About page</h3>
     </div>
 
      <!--Import JavaScript Source File-->
